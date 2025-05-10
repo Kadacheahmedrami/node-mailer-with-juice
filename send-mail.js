@@ -37,8 +37,8 @@ async function sendCTFInvitation() {
     },
     attachments: [
       {
-        filename: 'hawiyat.png',
-        path: path.join(__dirname, 'hawiyat.png'),
+        filename: 'logo.png',
+        path: path.join(__dirname, 'logo.png'),
         cid:  'logo@estin',
         contentDisposition: 'inline'
       },
