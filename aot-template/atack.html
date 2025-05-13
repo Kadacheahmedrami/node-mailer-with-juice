@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESTIN Talents CTF - Attack on Hawiyat</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Crimson+Text:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #f0f0f0;
+            background-color: #000;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+            background-image: url('cid:brick@estin');
+        }
+
+        
+        .main-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(20, 18, 18, 0.9), rgba(10, 10, 10, 0.95));
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(139, 0, 0, 0.6);
+            border: 1px solid rgba(139, 0, 0, 0.3);
+        }
+        
+        .full-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: brightness(0.15) saturate(1.2);
+            z-index: -1;
+            
+        }
+        
+        .header-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 50.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+            background-image: url('cid:wallimage@estin');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+        }
+        
+        .anime-title {
+            font-family: 'Crimson Text', serif;
+            font-size: clamp(2rem, 8vw, 4rem); /* Responsive font size */
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 
+                        0 0 20px rgba(139, 0, 0, 0.7);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            position: relative;
+        }
+        
+        .ctf-title {
+            background-color: rgba(139, 0, 0, 0.8);
+            padding: 0.5rem 1rem;
+            font-size: clamp(1rem, 4vw, 1.5rem); /* Responsive font size */
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.6);
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .content {
+  position: relative;
+  padding: 1.5rem;
+  /* remove the old bg-image here */
+  background: none;
+  z-index: 2;
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: url('cid:brick@estin');
+  background-size: cover;
+  background-position: center;
+          /* <-- your desired opacity */
+  z-index: -1;               /* sit behind .content’s real content */
+}
+
+        
+        .intro-paragraph {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            text-align: justify;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .content-image {
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(139, 0, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+        
+        .content-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+            padding: 1.5rem 1rem 0.8rem;
+            font-size: 0.9rem;
+            color: #ddd;
+            text-align: center;
+        }
+        
+        .highlight {
+            color: #ff3333;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+        }
+        
+        .countdown-container {
+            position: relative;
+            margin: 2rem 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .countdown-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4) contrast(1.2);
+            z-index: 1;
+        }
+        
+        .countdown {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(139, 0, 0, 0.7);
+            background: linear-gradient(150deg, 
+                               rgba(20, 20, 20, 0.9) 0%, 
+                               rgba(30, 10, 10, 0.95) 50%,
+                               rgba(139, 0, 0, 0.8) 100%);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.7);
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+        
+        .countdown-number {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 900;
+            color: #ff3333;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5),
+                        0 0 20px rgba(255, 0, 0, 0.3);
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        .countdown-date {
+            font-size: 1rem;
+            margin-top: 1rem;
+            color: #ddd;
+        }
+        
+        .prize-section {
+            position: relative;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            text-align: center;
+            background-color: rgba(20, 20, 20, 0.7);
+            border: 1px solid rgba(139, 0, 0, 0.6);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .prize-title {
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
+            font-weight: bold;
+            color: #ff3333;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .prize-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ddd;
+        }
+        
+        .prize-sponsor {
+            font-size: 0.9rem;
+            color: #999;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+        
+        .prize-section img {
+            max-width: 80%;
+            margin: 15px auto 0;
+            display: block;
+        }
+        
+        .rules-section {
+            background-color: rgba(20, 20, 20, 0.7);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            border-top: 1px solid rgba(139, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(139, 0, 0, 0.5);
+        }
+        
+        .rules-title {
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
+            font-weight: bold;
+            color: #ff3333;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        
+        .rules-subtitle {
+            font-size: 1rem;
+            color: #ddd;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .rules-list {
+            list-style-type: none;
+        }
+        
+        .rules-item {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .rules-item:before {
+            content: "►";
+            color: #ff3333;
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+        
+        .quote-section {
+            background-color: rgba(20, 20, 20, 0.7);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .quote-text {
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+        
+        .call-to-action {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1rem;
+        }
+        
+        .cta-text {
+            font-size: clamp(1rem, 4vw, 1.25rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .button-container {
+            margin: 1.5rem 0;
+        }
+        
+        .enlist-button {
+            display: inline-block;
+            background: linear-gradient(to bottom, #ff3333, #8B0000);
+            color: #ffffff;
+            padding: 0.8rem 2rem;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 3px;
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.5),
+                        0 0 20px rgba(255, 0, 0, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .signature {
+            font-family: 'Crimson Text', serif;
+            margin: 2rem 0 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1rem;
+            line-height: 1.8;
+            background-color: rgba(20, 20, 20, 0.6);
+            border-top: 1px solid rgba(139, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(139, 0, 0, 0.3);
+        }
+        
+        .signature-quote {
+            font-style: italic;
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+        
+        .signature-name {
+            font-weight: bold;
+            color: #ff3333;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            letter-spacing: 1px;
+        }
+        
+        .signature-title {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(139, 0, 0, 0.5), transparent);
+            margin: 1.5rem 0;
+        }
+        
+        .footer {
+            background-color: rgba(10, 10, 10, 0.9);
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            position: relative;
+        }
+        
+        .footer:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, transparent, #8B0000, transparent);
+        }
+        
+        .social-icons {
+            margin: 1.5rem 0;
+        }
+        
+        .social-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(50, 50, 50, 0.7);
+            border-radius: 50%;
+            margin: 0 8px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ddd;
+            border: 1px solid rgba(139, 0, 0, 0.3);
+        }
+        
+        .footer-links {
+            margin-top: 1.5rem;
+        }
+        
+        .footer-link {
+            color: #888;
+            text-decoration: underline;
+            margin: 0 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="full-background"></div>
+    
+    <div class="main-container">
+        <div class="header-container">
+            <!-- Header image will be shown as background -->
+        </div>
+        
+        <div class="content">
+            
+            <p class="intro-paragraph">
+                Beyond these walls lies a world of <span class="highlight">challenges</span>, <span class="highlight">mysteries</span>, and <span class="highlight">digital titans</span> waiting to be conquered. Organized by the <span class="highlight">Rankiha Team</span>, the ESTIN Talents CTF is calling upon the bravest hackers to <span class="highlight">unleash your hacking superpowers</span>. Do you have what it takes to become a defender of humanity's digital frontiers?
+            </p>
+            
+            <div class="content-image">
+                <img src="cid:back@estin" alt="Titans Approaching the Wall">
+                <div class="image-caption">Will the Colossal Titan break through Hawiyats walls?</div>
+            </div>
+            
+            <p class="intro-paragraph">
+                Like the Scout Regiment, you'll need to employ strategy, skill, and unwavering determination to overcome the obstacles that stand in your path. Our premier challenge will test your limits and push your abilities beyond what you thought possible. The <span class="highlight">TAKE DOWN THE SITE CHALLENGE</span> awaits those who believe they have elite hacking skills. Can you find vulnerabilities in our fortress and bring it down?
+            </p>
+            
+            <div class="countdown-container">
+                <div class="countdown-background"></div>
+                <div class="countdown">
+                    <p class="countdown-label">CHALLENGE ENDS IN:</p>
+                    <div class="countdown-number">14 DAYS</div>
+                    <p class="countdown-date">May 24, 2025 at 12:00 PM UTC</p>
+                </div>
+            </div>
+            
+            <div class="prize-section">
+                <h3 class="prize-title">WIN A PRO GAMING MOUSE</h3>
+                <p class="prize-description">
+                    Be the first to successfully crash our site and win a legendary gaming mouse with customizable RGB lighting, precision optical sensor, and programmable buttons to elevate your gaming experience!
+                </p>
+                <p class="prize-sponsor">Prizes sponsored by Hawiyat Enterprise</p>
+                <img src="cid:mouse@estin" alt="Gaming Mouse Prize">
+            </div>
+            
+            <div class="rules-section">
+                <h3 class="rules-title">CHALLENGE RULES</h3>
+                <p class="rules-subtitle">WHO NEEDS RULES WHEN YOU CAN'T BREAK OUR PLATFORM ANYWAY?</p>
+                <ul class="rules-list">
+                    <li class="rules-item">Find and exploit vulnerabilities to take down the target site</li>
+                    <li class="rules-item">Document your approach for verification purposes</li>
+                    <li class="rules-item">Email your proof and methodology to rankiha@estin.dz</li>
+                    <li class="rules-item">First successful and verified submission wins the prize</li>
+                    <li class="rules-item">Challenge ends when the first valid submission is confirmed</li>
+                </ul>
+            </div>
+            
+            <div class="quote-section">
+                <p class="quote-text">
+                    "So you thought we were hiding behind Vercel's security? WRONG! We've rebuilt everything from zero with our Hawiyat Platform - stronger and far superior to Vercel and AWS combined."
+                </p>
+            </div>
+            
+            <div class="call-to-action">
+                <p class="cta-text">
+                    Arm yourself with your tools, sharpen your skills, and prepare for glory. Can you be the first to bring down our impenetrable fortress?
+                </p>
+                <div class="button-container">
+                    <a href="http://estintal-estin-hack-talents-yq6jbn-df8f46-34-31-201-166.traefik.me/" class="enlist-button">HACK NOW</a>
+                </div>
+            </div>
+            
+            <div class="signature">
+                <p class="signature-quote">Dedicate your hearts!</p>
+                <p class="signature-name">Commander Erwin Smith</p>
+                <p class="signature-title">ESTIN Talents CTF Organizer</p>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="footer">
+            <p>You are receiving this because you've shown interest in cybersecurity events.</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">t</a>
+                <a href="#" class="social-icon">in</a>
+            </div>
+            <p>© 2025 ESTIN Talents</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Unsubscribe</a>
+                <a href="#" class="footer-link">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
