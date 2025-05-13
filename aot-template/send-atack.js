@@ -43,12 +43,6 @@ async function sendCTFInvitation() {
     },
     attachments: [
       {
-        filename: 'logo.png',
-        path: path.join(__dirname, 'logo.png'),
-        cid:  'logo@estin',
-        contentDisposition: 'inline'
-      },
-      {
         filename: 'wallimage.png',
         path: path.join(__dirname, 'wallimage.png'),
         cid:  'wallimage@estin',
